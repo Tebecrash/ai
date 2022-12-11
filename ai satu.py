@@ -5,6 +5,7 @@ import pygame
 import requests
 import numpy as np
 import pip
+import subprocess
 
 # Membuat fungsi sigmoid
 def sigmoid(x):
@@ -168,3 +169,50 @@ result = best_method(goal)
 
 # Menjalankan perintah yang membutuhkan akses root
 os.system("echo kali | sudo -S perintah yang membutuhkan akses root")
+
+# Mendapatkan nama user yang sedang login
+current_user = os.getlogin()
+
+# Mendapatkan daftar direktori yang ada di direktori home user yang sedang login
+directories = subprocess.check_output(["ls", "/home/" + current_user]).decode("utf-8").split("\n")
+
+# Menampilkan daftar direktori yang ada di direktori home user yang sedang login
+print("Daftar direktori di /home/" + current_user + ":")
+for directory in directories:
+  print(directory)
+
+#Fungsi untuk membaca file
+def read_file(file_name):
+  # Membuka file dengan mode read
+  with open(file_name, "r") as file:
+    # Membaca seluruh isi file dan mengembalikannya
+    return file.read()
+
+#Fungsi untuk menulis file
+def write_file(file_name, content):
+  # Membuka file dengan mode write
+  with open(file_name, "w") as file:
+    # Menulis isi dari content ke dalam file
+    file.write(content)
+
+#Fungsi untuk mengeksekusi perintah shell
+def execute_command(command):
+  # Menjalankan perintah shell
+  output = subprocess.check_output(command, shell=True)
+  # Mengembalikan output dari perintah shell
+  return output
+
+#Fungsi untuk mengambil nama semua file di direktori saat ini
+def get_file_names():
+  # Menggunakan perintah shell untuk mengambil nama semua file di direktori saat ini
+  files = subprocess.check_output("ls", shell=True)
+  # Mengembalikan nama semua file yang ditemukan
+  return files
+
+#Fungsi untuk mengambil konten dari suatu URL
+def get_url_content(url):
+  # Mengambil konten dari suatu URL
+  content = requests.get(url).text
+  # Mengembalikan konten yang ditemukan
+  return content
+
