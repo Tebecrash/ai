@@ -1,5 +1,7 @@
 speech_recognition
 gTTS
-numpy
 pygame
 requests
+numpy
+pip
+subprocess
