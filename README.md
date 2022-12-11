@@ -1,2 +1,2 @@
-# ai
+# Ai (automate pentesting)
 pentesting
